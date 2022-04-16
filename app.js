@@ -5,8 +5,6 @@ const postRouter = require("./routes/posts")//router폴더 안에 있는 기능�
 
 
 
-
-
 const requestMiddleware = (req, res, next) => { 
     console.log("request Url : ", req.originalUrl, "-", new Date());
     next();
