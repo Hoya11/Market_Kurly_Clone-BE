@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
     },
     title: DataTypes.STRING,
-    price: TimetaTypes.INTEGER,
+    price: DataTypes.INTEGER,
     discount: DataTypes.INTEGER,
     kurlyOnly: DataTypes.BOOLEAN,
     imgurl: DataTypes.STRING,

@@ -2,46 +2,78 @@
 const puppeteer = require('puppeteer');
 const cheerio = require('cheerio');
 
-(async() => {
-  // 브라우저를 실행한다.
-  // 옵션으로 headless모드를 끌 수 있다.
-  const browser = await puppeteer.launch({
-    headless: false
-  });
+const db = require("./models");
 
-  // 새로운 페이지를 연다.
-  const page = await browser.newPage();
-  // 페이지의 크기를 설정한다.
-  await page.setViewport({
-    width: 1366,
-    height: 768
-  });
-  // "https://www.goodchoice.kr/product/search/2" URL에 접속한다. (여기어때 호텔 페이지)
-  await page.goto('https://www.kurly.com/shop/goods/goods_list.php?category=038');
+const crawler = async () => {
+  db.products.sync();
+  try {
+    (async () => {
+      await db.sequelize.sync();
+      // 브라우저를 실행한다.
+      // 옵션으로 headless모드를 끌 수 있다.
+      const browser = await puppeteer.launch({
+        headless: false
+      });
 
-
-  // 페이지의 HTML을 가져온다.
-  const content = await page.content();
-  // $에 cheerio를 로드한다.
-  const $ = cheerio.load(content);
-  // 복사한 리스트의 Selector로 리스트를 모두 가져온다.
-  const lists = $("#goodsList > div.list_goods > div > ul > li");
-  // 모든 리스트를 순환한다.
-  lists.each((index, list) => {
-    const names = $(list).find("div > a > span.name").text();
-    const imgs = $(list).find("div > a > img").attr("src");
-    const prices = $(list).find("div > a > span.cost > span.price").text();
-    const discounts = $(list).find("div > a > span.cost > span.dc").text();
-    const originals = $(list).find("div > a > span.cost > span.original").text();
-    const descs = $(list).find("div > a > span.desc").text();
-    const kurlyOnlys =  $(list).find("div > a > span.tag > span").text();
+      // 새로운 페이지를 연다.
+      const page = await browser.newPage();
+      await page.setUserAgent( //
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36'
+      );
+      // 페이지의 크기를 설정한다.
+      await page.setViewport({
+        width: 1366,
+        height: 768
+      });
+      // "https://www.goodchoice.kr/product/search/2" URL에 접속한다. (여기어때 호텔 페이지)
+      await page.goto('https://www.kurly.com/shop/goods/goods_list.php?category=038');
 
 
-    console.log({index, names, imgs, prices, discounts, originals, descs, kurlyOnlys});
-  });
-  // 브라우저를 종료한다.
-  browser.close();
-})();
+      // 페이지의 HTML을 가져온다.
+      const content = await page.content();
+      // $에 cheerio를 로드한다.
+      const $ = cheerio.load(content);
+      // 복사한 리스트의 Selector로 리스트를 모두 가져온다.
+      const lists = $("#goodsList > div.list_goods > div > ul > li");
+      // 모든 리스트를 순환한다.
+      lists.each((index, list) => {
+        const names = $(list).find("div > a > span.name").text();
+        const imgs = $(list).find("div > a > img").attr("src");
+        const prices = $(list).find("div > a > span.cost > span.price").text();
+        const discounts = $(list).find("div > a > span.cost > span.dc").text();
+        const originals = $(list).find("div > a > span.cost > span.original").text();
+        const descs = $(list).find("div > a > span.desc").text();
+        const kurlyOnlys = $(list).find("div > a > span.tag > span").text();
+
+
+        console.log({ index, names, imgs, prices, discounts, originals, descs, kurlyOnlys });
+      });
+      await Promise.all(
+        result.map((r) => {
+          return db.products.create({
+            postId: r.postId,
+            name: r.name,
+            prices: r.prices,
+            discounts: r.discounts,
+            originals: originals,
+            descs: r.descs,
+            kurlyOnlys: r.kurlyOnlys,
+          });
+        })
+      );
+      // 브라우저를 종료한다.
+
+      browser.close();
+      db.sequelize.close();
+    });
+  } catch (err) {
+    console.log(err);
+  } finally {
+
+  }
+};
+
+crawler();
 
 // #goodsList > div.list_goods > div > ul > li:nth-child(3) > div > div > a > img
 // #goodsList > div.list_goods > div > ul > li:nth-child(2) > div > a > span.name
