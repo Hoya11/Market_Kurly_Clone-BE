@@ -15,10 +15,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       price: {
-        type: Sequelize.STRING
+        type: Sequelize.INTEGER
       },
       discount: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       kurlyOnly: {
         type: Sequelize.BOOLEAN
@@ -27,7 +27,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       like: {
-        type: Sequelize.NUMBER
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
