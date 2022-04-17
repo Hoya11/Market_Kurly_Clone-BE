@@ -3,7 +3,7 @@ const app = express();// express를 app이라는 변수에 넣어서 함수처�
 const port = 3001;     //3001번 포트로 열어 로컬환경에서 서버를 켜주는 코드
 const userRouter = require("./routes/user")//router폴더 안에 있는 기능을 서버로 가져와서 postRouter변수에 넣어
 const productRouter = require("./routes/product")//router폴더 안에 있는 기능을 서버로 가져와서 postRouter변수에 넣어
-
+const reviewRouter = require("./routes/review")
 
 
 const requestMiddleware = (req, res, next) => {
@@ -15,7 +15,7 @@ const requestMiddleware = (req, res, next) => {
 app.use(express.static("static"));
 app.use(requestMiddleware);
 app.use(express.json());
-app.use("/api", [userRouter, productRouter]);
+app.use("/api", [userRouter, productRouter, reviewRouter]);
 
 
 app.get("/", (req, res) => {

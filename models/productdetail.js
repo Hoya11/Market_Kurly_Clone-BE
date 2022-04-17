@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
+
   productDetail.init({
     productId: {
       primaryKey: true,
