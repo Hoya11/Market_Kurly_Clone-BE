@@ -1,3 +1,7 @@
+// puppeteer을 가져온다.
+const puppeteer = require('puppeteer');
+const cheerio = require('cheerio');
+const {market_kurlynew} = require('../models');
 const express = require("express");
 const { User } = require("../models");
 // const { productNew } = require("../models/productnew")
@@ -66,6 +70,61 @@ router.get("/users/me", async (req, res) => {
 
 
 
+
+
+
+
+router.post("/product/new", async (req, res) => {
+    // 브라우저를 실행한다.
+    // 옵션으로 headless모드를 끌 수 있다.
+    const { index, title, price, discount, kurlyOnly, imgurl, originals, desc } = req.body;
+    const browser = await puppeteer.launch({
+      headless: false
+    });
+  
+    // 새로운 페이지를 연다.
+    const page = await browser.newPage();
+    // 페이지의 크기를 설정한다.
+    await page.setViewport({
+      width: 1366,
+      height: 768
+    });
+  
+    await page.goto('https://www.kurly.com/shop/goods/goods_list.php?category=038');
+  
+  
+    // 페이지의 HTML을 가져온다.
+    const content = await page.content();
+    // $에 cheerio를 로드한다.
+    const $ = cheerio.load(content);
+    // 복사한 리스트의 Selector로 리스트를 모두 가져온다.
+    const lists = $("#goodsList > div.list_goods > div > ul > li");
+    // 모든 리스트를 순환한다.
+  
+    
+    
+    lists.each(async (index, list) => {
+      const title = $(list).find("div > a > span.name").text().trim();
+      const imgurl = $(list).find("div > div > a > img").attr("src");
+      const price = $(list).find("div > a > span.cost > span.price").text().replace(/[^0-9]/g,'');
+      const discount = $(list).find("div > a > span.cost > span.dc").text().replace(/[^0-9]/g,'');
+      const originals = $(list).find("div > a > span.cost > span.original").text().replace(/[^0-9]/g,'');
+      const desc = $(list).find("div > a > span.desc").text();
+      const kurlyOnly =  $(list).find("div > a > span.tag > span").text();
+      // create(title, imgurl, price, discount, originals, desc, kurlyOnly);
+      
+      await market_kurlynew.create({title:title)
+      console.log({index, title, price, discount, kurlyOnly, imgurl, originals, desc});
+      
+      
+    });
+    // function create(title, imgurl, price, discount, originals, desc, kurlyOnly) {
+    //   market_kurlynew.create({title: title, price: price, discount: discount, kurlyOnly: kurlyOnly, imgurl: imgurl, originals: originals, desc: desc})
+    // }
+  
+    // 브라우저를 종료한다.
+    browser.close();
+  })();
 
 
 // //list목록 조회

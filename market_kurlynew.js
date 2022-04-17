@@ -1,10 +1,10 @@
 // puppeteer을 가져온다.
 const puppeteer = require('puppeteer');
 const cheerio = require('cheerio');
-const { market_kurlynew } = require('./models');
+const { productNew } = require('./models');
 
 
-const kurlyNew = (async(req, res) => {
+(async(req, res) => {
   // 브라우저를 실행한다.
   // 옵션으로 headless모드를 끌 수 있다.
   const browser = await puppeteer.launch({
@@ -31,24 +31,32 @@ const kurlyNew = (async(req, res) => {
   // 모든 리스트를 순환한다.
 
   
-  
-  lists.each((index, list) => {
-    const title = $(list).find("div > a > span.name").text().trim();
-    const imgurl = $(list).find("div > div > a > img").attr("src");
-    const price = $(list).find("div > a > span.cost > span.price").text().replace(/[^0-9]/g,'');
-    const discount = $(list).find("div > a > span.cost > span.dc").text().replace(/[^0-9]/g,'');
-    const originals = $(list).find("div > a > span.cost > span.original").text().replace(/[^0-9]/g,'');
-    const desc = $(list).find("div > a > span.desc").text();
-    const kurlyOnly =  $(list).find("div > a > span.tag > span").text();
-    // creates(title, imgurl, price, discount, originals, desc, kurlyOnly);
+    let title = "";
+    let imgurl = "";
+    let price = 0;
+    let discount = 0;
+    let originals = 0;
+    let desc = "";
+    let kurlyOnly = true;
+    
+  lists.each(async(index, list) => {
+    title = $(list).find("div > a > span.name").text().trim();
+    imgurl = $(list).find("div > div > a > img").attr("src");
+    price = Number($(list).find("div > a > span.cost > span.price").text().replace(/[^0-9]/g,''));
+    discount = Number($(list).find("div > a > span.cost > span.dc").text().replace(/[^0-9]/g,''));
+    originals = Number($(list).find("div > a > span.cost > span.original").text().replace(/[^0-9]/g,''));
+    desc = $(list).find("div > a > span.desc").text();
+    exitedKurlyOnly =  $(list).find("div > a > span.tag > span").text();
+    if(exitedKurlyOnly === ""){
+      kurlyOnly = false
+    }else {
+      kurlyOnly = true
+    }
 
     console.log({index, title, price, discount, kurlyOnly, imgurl, originals, desc});
-    
-    
+    await productNew.create({title, price, discount, kurlyOnly, imgurl, originals, desc})
   });
-  // function creates(title, imgurl, price, discount, originals, desc, kurlyOnly) {
-  //   market_kurlynew.create({title: title, price: price, discount: discount, kurlyOnly: kurlyOnly, imgurl: imgurl, originals: originals, desc: desc})
-  // }
+    
 
   // 브라우저를 종료한다.
   browser.close();
@@ -62,3 +70,12 @@ const kurlyNew = (async(req, res) => {
 // #goodsList > div.list_goods > div > ul > li:nth-child(1) > div > a > span.cost > span.original
 // #goodsList > div.list_goods > div > ul > li:nth-child(5) > div > a > span.desc
 // #goodsList > div.list_goods > div > ul > li:nth-child(7) > div > a > span.tag > span
+
+
+// const title = "";
+//     const imgurl = "";
+//     const price = "";
+//     const discount = "";
+//     const originals = "";
+//     const desc = "";
+//     const kurlyOnly = "";
