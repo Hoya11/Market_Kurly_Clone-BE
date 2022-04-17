@@ -1,14 +1,7 @@
-
-const express = require("express");
 const { User } = require("../../models");
-const router = express.Router();
 const jwt = require('jsonwebtoken')
 // const authMiddleware = require("../middleswares/auth-middleware")
 
-router.get("/", (req, res) => {
-    console.log("미들웨어가 작동합니다.")
-    res.send('list page')
-});
 
 
 //회원가입
@@ -37,7 +30,7 @@ const signUp = async (req, res) => {
 
 
 //로그인
-router.post("/login", async (req, res) => {
+const login = async (req, res) => {
     const { userId, password } = req.body; 
     console.log(userId,password)
     const user = await User.findOne({ where: { userId, password }});
@@ -52,20 +45,20 @@ router.post("/login", async (req, res) => {
     res.send({
         token,
     })
-});
+};
 
 
-router.get("/users/me", async (req, res) => {
+const user = async (req, res) => {
     // console.log(res.locals)
     const { user } = res.locals;//변수user에 res.locals를 할당해준다
     // console.log(locals)
     res.send({//응답값 user
       user,
     });
-  })
+  }
 
 
-module.exports = router;
-module.exports = { signUp }
+
+module.exports = { signUp, login, user }
 
 
