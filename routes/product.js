@@ -4,10 +4,10 @@ const { newProduct, bestProduct, saleProduct  } = require('./controllers/product
 
 
 //회원가입
-router.post('/signUp', newProduct);
+router.get('/product/new', newProduct);
 
 //로그인
-router.post("/login", bestProduct);
+router.get("/product/best", bestProduct);
 
 //사용자 인증
 router.get("/users/me", saleProduct);
