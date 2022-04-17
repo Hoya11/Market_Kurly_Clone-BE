@@ -1,20 +1,7 @@
-<<<<<<< HEAD
-const express = require("express");
-const { User } = require("../../models");
-const router = express.Router();
-const jwt = require('jsonwebtoken')
-// const authMiddleware = require("../middleswares/auth-middleware")
-
-router.get("/", (req, res) => {
-    console.log("미들웨어가 작동합니다.")
-    res.send('list page')
-});
-=======
 const { User } = require("../../models");
 const jwt = require('jsonwebtoken')
 // const authMiddleware = require("../middleswares/auth-middleware")
 
->>>>>>> origin/jinwoo
 
 
 //회원가입
@@ -44,19 +31,11 @@ const signUp = async (req, res) => {
 
 //로그인
 const login = async (req, res) => {
-<<<<<<< HEAD
     const { userId, password } = req.body;
     console.log(userId, password)
     const user = await User.findOne({ where: { userId, password } });
 
     if (!user) {
-=======
-    const { userId, password } = req.body; 
-    console.log(userId,password)
-    const user = await User.findOne({ where: { userId, password }});
-
-    if(!user) {
->>>>>>> origin/jinwoo
         res.status(400).send({
             errorMessage: '닉네임 또는 패스워드를 확인해주세요.'
         })
@@ -69,31 +48,17 @@ const login = async (req, res) => {
 };
 
 
-<<<<<<< HEAD
-const getUser = async (req, res) => {
-=======
 const user = async (req, res) => {
->>>>>>> origin/jinwoo
     // console.log(res.locals)
     const { user } = res.locals;//변수user에 res.locals를 할당해준다
     // console.log(locals)
     res.send({//응답값 user
-<<<<<<< HEAD
         user,
     });
 }
-
-
-module.exports = router;
-module.exports = { signUp, login, getUser }
-=======
-      user,
-    });
-  }
 
 
 
 module.exports = { signUp, login, user }
 
 
->>>>>>> origin/jinwoo
