@@ -1,9 +1,10 @@
 // puppeteer을 가져온다.
 const puppeteer = require('puppeteer');
 const cheerio = require('cheerio');
-const {market_kurlynew} = require('./models')
+const { market_kurlynew } = require('./models');
 
-const kurlyNew = (async() => {
+
+const kurlyNew = (async(req, res) => {
   // 브라우저를 실행한다.
   // 옵션으로 headless모드를 끌 수 있다.
   const browser = await puppeteer.launch({
@@ -30,7 +31,8 @@ const kurlyNew = (async() => {
   // 모든 리스트를 순환한다.
 
   
-  lists.each( async (index, list) => {
+  
+  lists.each((index, list) => {
     const title = $(list).find("div > a > span.name").text().trim();
     const imgurl = $(list).find("div > div > a > img").attr("src");
     const price = $(list).find("div > a > span.cost > span.price").text().replace(/[^0-9]/g,'');
@@ -38,25 +40,20 @@ const kurlyNew = (async() => {
     const originals = $(list).find("div > a > span.cost > span.original").text().replace(/[^0-9]/g,'');
     const desc = $(list).find("div > a > span.desc").text();
     const kurlyOnly =  $(list).find("div > a > span.tag > span").text();
+    // creates(title, imgurl, price, discount, originals, desc, kurlyOnly);
 
-    const kurlyinfo = {
-        title,
-        price,
-        discount,
-        kurlyOnly,
-        imgurl,
-        originals,
-        desc
-    }
     console.log({index, title, price, discount, kurlyOnly, imgurl, originals, desc});
-    // await page.waitForTimeout(3000);
-    // return kurlyinfo
+    
+    
   });
-  // await market_kurlynew.create({title, price, discount, kurlyOnly, imgurl, originals, desc})
-  
+  // function creates(title, imgurl, price, discount, originals, desc, kurlyOnly) {
+  //   market_kurlynew.create({title: title, price: price, discount: discount, kurlyOnly: kurlyOnly, imgurl: imgurl, originals: originals, desc: desc})
+  // }
+
   // 브라우저를 종료한다.
   browser.close();
 })();
+
 // kurlyNew()
 // #goodsList > div.list_goods > div > ul > li:nth-child(3) > div > div > a > img
 // #goodsList > div.list_goods > div > ul > li:nth-child(2) > div > a > span.name

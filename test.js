@@ -370,3 +370,4 @@ const crawler = async() => {
 // ]
 // urllist.forEach(url => crawler(url)); // 실행 문제있음
 crawler();
+
