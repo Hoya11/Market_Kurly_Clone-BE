@@ -1,7 +1,7 @@
 // puppeteer을 가져온다.
 const puppeteer = require('puppeteer');
 const cheerio = require('cheerio');
-const { productNew } = require('./models');
+const { productBest } = require('../models');
 
 
 (async(req, res) => {
@@ -19,7 +19,7 @@ const { productNew } = require('./models');
     height: 768
   });
 
-  await page.goto('https://www.kurly.com/shop/goods/goods_list.php?category=038');
+  await page.goto('https://www.kurly.com/shop/goods/goods_list.php?category=029');
 
 
   // 페이지의 HTML을 가져온다.
@@ -54,7 +54,7 @@ const { productNew } = require('./models');
     }
 
     console.log({index, title, price, discount, kurlyOnly, imgurl, originals, desc});
-    await productNew.create({title, price, discount, kurlyOnly, imgurl, originals, desc})
+    await productBest.create({title, price, discount, kurlyOnly, imgurl, originals, desc})
   });
     
 
@@ -71,11 +71,8 @@ const { productNew } = require('./models');
 // #goodsList > div.list_goods > div > ul > li:nth-child(5) > div > a > span.desc
 // #goodsList > div.list_goods > div > ul > li:nth-child(7) > div > a > span.tag > span
 
-
-// const title = "";
-//     const imgurl = "";
-//     const price = "";
-//     const discount = "";
-//     const originals = "";
-//     const desc = "";
-//     const kurlyOnly = "";
+// #goodsList > div.list_goods > div > ul > li:nth-child(46) > div > div > div > button > span
+// #goodsList > div.list_goods > div > ul > li:nth-child(43) > div > div > div > button > span
+// #sectionView > div > div.goods_info > dl.list.fst > dd
+// #sectionView > div > div.goods_info > dl.list.fst > dd
+// #sectionView > div > div.goods_info > dl.list.fst > dd
