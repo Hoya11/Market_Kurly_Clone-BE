@@ -17,7 +17,7 @@ const cheerio = require('cheerio');
     height: 768
   });
   // "https://www.goodchoice.kr/product/search/2" URL에 접속한다. (여기어때 호텔 페이지)
-  await page.goto('https://www.kurly.com/shop/goods/goods_list.php?category=038');
+  await page.goto('https://www.kurly.com/shop/goods/goods_list.php?list=sale');
 
 
   // 페이지의 HTML을 가져온다.
@@ -28,11 +28,11 @@ const cheerio = require('cheerio');
   const lists = $("#goodsList > div.list_goods > div > ul > li");
   // 모든 리스트를 순환한다.
   lists.each((index, list) => {
-    const names = $(list).find("div > a > span.name").text();
-    const imgs = $(list).find("div > a > img").attr("src");
-    const prices = $(list).find("div > a > span.cost > span.price").text();
-    const discounts = $(list).find("div > a > span.cost > span.dc").text();
-    const originals = $(list).find("div > a > span.cost > span.original").text();
+    const names = $(list).find("div > a > span.name").text().trim();
+    const imgs = $(list).find("div > div > a > img").attr("src");
+    const prices = $(list).find("div > a > span.cost > span.price").text().replace(/[^0-9]/g,'');
+    const discounts = $(list).find("div > a > span.cost > span.dc").text().replace(/[^0-9]/g,'');
+    const originals = $(list).find("div > a > span.cost > span.original").text().replace(/[^0-9]/g,'');
     const descs = $(list).find("div > a > span.desc").text();
     const kurlyOnlys =  $(list).find("div > a > span.tag > span").text();
 
@@ -43,10 +43,4 @@ const cheerio = require('cheerio');
   browser.close();
 })();
 
-// #goodsList > div.list_goods > div > ul > li:nth-child(3) > div > div > a > img
-// #goodsList > div.list_goods > div > ul > li:nth-child(2) > div > a > span.name
-// #goodsList > div.list_goods > div > ul > li:nth-child(1) > div > a > span.cost > span.price
-// #goodsList > div.list_goods > div > ul > li:nth-child(1) > div > a > span.cost > span.dc
-// #goodsList > div.list_goods > div > ul > li:nth-child(1) > div > a > span.cost > span.original
-// #goodsList > div.list_goods > div > ul > li:nth-child(5) > div > a > span.desc
-// #goodsList > div.list_goods > div > ul > li:nth-child(7) > div > a > span.tag > span
+// #goodsList > div.list_goods > div > ul > li:nth-child(1) > div > div > a > img

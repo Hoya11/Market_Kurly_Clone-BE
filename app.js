@@ -4,7 +4,6 @@ const port = 3001;     //3001번 포트로 열어 로컬환경에서 서버를 �
 const postRouter = require("./routes/posts")//router폴더 안에 있는 기능을 서버로 가져와서 postRouter변수에 넣어
 
 
-
 const requestMiddleware = (req, res, next) => { 
     console.log("request Url : ", req.originalUrl, "-", new Date());
     next();
