@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
     console.log('지나감')
     const { authorization } = req.headers;
     const [tokenType, tokenValue] = authorization.split(' ')//Bearer를 제거하고 뒤에있는 토근값만 받기위해 스플릿으로 나누어줬다.
-    // console.log(tokenType)
+    console.log(tokenType)
     if (tokenType !== 'Bearer') {
         res.status(401).send({
             errorMessage: '로그인 후 사용하세요.'

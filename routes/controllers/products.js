@@ -23,8 +23,7 @@ const saleProduct = async (req, res) => {
 const getDetail = async (req, res) => {
     // const { productId } = req.params;
     const Detailpage = await productDetail.findAll({})
-    const reviewList = await reviews.findAll({})
-    // console.log(productId, Detailpage)
+    const reviewList = await Review.findAll({ where: { productId } })
     res.json({ Detailpage, reviewList })
 }
 

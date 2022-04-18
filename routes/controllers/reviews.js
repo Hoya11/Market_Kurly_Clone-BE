@@ -43,21 +43,10 @@ const createReview = async (req, res) => {
 //   })
 
 const removeReview = async (req, res) => {
-    // const { reviewsid } = req.params;
-    const { reviewsid } = req.body;
-    // const reviewid = 1
-    const { user } = res.locals;
-    console.log(req.params, user, reviewsid);
-    // const deleteReview = await Review.findOne({
-    //     where:{ }
-    // });
-
-    // console.log(thisReview);
-
-    // await thisReview.destroy();
+    const { reviewId } = req.body;
+    await Review.destroy({ where: { reviewId } })
 
     res.send({ msg: "댓글이 삭제되었습니다" });
-
 }
 
 // async function httpDeleteComment(req, res) {
