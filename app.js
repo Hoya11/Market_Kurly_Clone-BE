@@ -6,6 +6,8 @@ const productRouter = require("./routes/product")//router폴더 안에 있는 �
 const reviewRouter = require("./routes/review")
 const cartRouter = require("./routes/cart")
 
+//테스트
+
 const requestMiddleware = (req, res, next) => {
     // console.log("request Url : ", req.originalUrl, "-", new Date());
     next();
