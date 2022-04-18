@@ -1,12 +1,3 @@
-// const { Op } = require("sequelize");
-
-
-
-// const pushCart = async (req, res) => {
-//     const 
-// }
-
-
 const { Cart, productDetail } = require('../../models');
 // const jwt = require("jsonwebtoken");
 // const authMiddleware = require("../../middleswares/auth-middleware")
@@ -163,9 +154,3 @@ module.exports = {
     putCartDec,
     deleteCart,
 };
-
-
-
-
-
-
