@@ -7,17 +7,17 @@
     "dialect": "mysql"
   },
   "test": {
-    "username": "ohjinwootest",
+    "username": "root",
     "password": null,
     "database": "database_test",
-    "host": "admin.cpi6zwtg2yzi.ap-northeast-2.rds.amazonaws.com",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
-    "username": "ohjinwootest",
+    "username": "root",
     "password": null,
     "database": "database_production",
-    "host": "admin.cpi6zwtg2yzi.ap-northeast-2.rds.amazonaws.com",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   }
 }
