@@ -1,19 +1,12 @@
 {
   "development": {
-<<<<<<< HEAD
     "username": "market22",
     "password": "1234qqww",
     "database": "market11",
     "host": "market11.cm1ddkms2wsw.ap-northeast-2.rds.amazonaws.com",
-=======
-    "username": "ohjinwootest",
-    "password": "Otest1238",
-    "database": "market_kurly",
-    "host": "market11.cpi6zwtg2yzi.ap-northeast-2.rds.amazonaws.com",
->>>>>>> 13b959512d9105c342b0c0a653265e7e232ec464
     "dialect": "mysql"
   },
-  
+   
   "test": {
     "username": "root",
     "password": null,
