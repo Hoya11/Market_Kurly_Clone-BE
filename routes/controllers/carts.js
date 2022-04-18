@@ -27,6 +27,7 @@ const addCart = async (req, res) => {
 
     try {
         await Cart.create({
+
             userId,
             productId,
             title: thePost.title,
