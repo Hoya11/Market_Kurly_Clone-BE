@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "1234qwer",
+    "password": "Otest1238",
     "database": "market_kurly",
     "host": "127.0.0.1",
     "dialect": "mysql"
