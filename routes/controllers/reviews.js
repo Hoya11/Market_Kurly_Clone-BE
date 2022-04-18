@@ -1,6 +1,5 @@
-const res = require('express/lib/response');
 const { Review } = require("../../models");
-
+const moment = require("moment");
 
 const createReview = async (req, res) => {
     try {
@@ -10,7 +9,7 @@ const createReview = async (req, res) => {
         const userId = user.userId
         const userName = user.userName
         // console.log(userId, userName)
-        const createdTime = String(new Date());//임시, 원래는 프론트에서 넘겨주어야 함
+        const createdTime = moment().format("YYYY-MM-DD HH:mm:ss")
         // console.log(createdTime)
 
         const list = await Review.create({
@@ -32,7 +31,12 @@ const createReview = async (req, res) => {
     }
 };
 
-
+const getReview = async (req, res) => {
+    const { productId } = req.params
+    const reviewList = await Review.findAll({ where: {productId} })
+    console.log(reviewList);
+    res.json({ reviewList })
+}
 
 
 
@@ -42,6 +46,8 @@ const removeReview = async (req, res) => {
 
     res.send({ msg: "댓글이 삭제되었습니다" });
 }
+
+
 
 // const removeReview =  async deleteProduct(id) {
 
@@ -63,7 +69,7 @@ const removeReview = async (req, res) => {
 
 //댓글 삭제
 
-module.exports = { createReview, removeReview }
+module.exports = { createReview, getReview, removeReview }
 
 
 
