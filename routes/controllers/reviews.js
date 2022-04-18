@@ -1,5 +1,6 @@
+const res = require('express/lib/response');
 const { Review } = require("../../models");
-const moment = require("moment");
+
 
 const createReview = async (req, res) => {
     try {
@@ -9,7 +10,7 @@ const createReview = async (req, res) => {
         const userId = user.userId
         const userName = user.userName
         // console.log(userId, userName)
-        const createdTime = moment().format("YYYY-MM-DD HH:mm:ss")
+        const createdTime = String(new Date());//임시, 원래는 프론트에서 넘겨주어야 함
         // console.log(createdTime)
 
         const list = await Review.create({
@@ -31,45 +32,48 @@ const createReview = async (req, res) => {
     }
 };
 
-const getReview = async (req, res) => {
-    const { productId } = req.params
-    const reviewList = await Review.findAll({ where: {productId} })
-    console.log(reviewList);
-    res.json({ reviewList })
-}
 
 
+
+// router.delete("/comments/delete/:commentId", authMiddleware, async (req, res) => {
+//     const { commentId } = req.params;
+//     await Comment.deleteOne({ _id: commentId });
+//     console.log(commentId)
+//     res.send({ result: '삭제완료' });
+//   })
 
 const removeReview = async (req, res) => {
     const { reviewId } = req.body;
-    await Review.destroy({ where: {reviewId}})
+    await Review.destroy({ where: { reviewId } })
 
     res.send({ msg: "댓글이 삭제되었습니다" });
 }
 
-
-
-// const removeReview =  async deleteProduct(id) {
-
-//     if (!id) {
-//         return {msg: 'No Id specified..', payload: 1};
-//     }
+// async function httpDeleteComment(req, res) {
+//     const { accomoId, commentId } = req.params;
+//     const { userId } = res.locals.user;
 
 //     try {
-//         return !!await products.destroy({
-//             where: {
-//                 id: id
-//             }
-//         });
-//     } catch (e) {
-//         return false;
-//     }
+//       const existingComment = await Comment.findOne({
+//         where: { commentId: commentId, accomoId: accomoId, userId: userId },
+//       });
 
-// }
+//       if (!existingComment) return res.status(400).send();
+
+//       await Comment.destroy({
+//         where: { commentId: commentId, accomoId: accomoId, userId: userId },
+//       });
+
+//       res.status(204).send();
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   }
+
 
 //댓글 삭제
 
-module.exports = { createReview, getReview, removeReview }
+module.exports = { createReview, removeReview }
 
 
 
