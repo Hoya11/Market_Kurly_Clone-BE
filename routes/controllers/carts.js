@@ -19,9 +19,9 @@ const addCart = async (req, res) => {
     const exitCart = await Cart.findOne({ userId, productId });
     // console.log(userId, amount, productId, exitCart)
     // console.log(exitCart.amount)
-    const cartAmount = Number(amount) + Number(exitCart.amount)
-    console.log(cartAmount)
+    // console.log(cartAmount)
     if (exitCart) {
+        const cartAmount = Number(amount) + Number(exitCart.amount)
         await Cart.update({ amount: +cartAmount }, { where: { userId, productId } })
         return res.status(200).json({ ok: "기존에 있는거여서 추가 했슴당" });
     }
@@ -64,21 +64,12 @@ const getCart = async (req, res) => {
     }
 };
 
-
 const deleteCart = async (req, res) => {
-    const { user } = res.locals;
-    const userId = user.userId
-    const { productId } = req.body;
-    try {
-        const deleteCarts = await Cart.findAll({ userId, productId });
-        if (deleteCarts.length) {
-            await Cart.destroy({ userId, productId });
-        }
-        res.status(200).json({ ok: "true", message: "삭제 성공" });
-    } catch (error) {
-        res.status(400).json({ ok: "false", message: "삭제 실패" });
-    }
-};
+    const { cartId } = req.body;
+    await Cart.destroy({ where: {cartId}})
+
+    res.send({ msg: "댓글이 삭제되었습니다" });
+}
 
 module.exports = {
     addCart,
