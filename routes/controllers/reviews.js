@@ -13,7 +13,7 @@ const createReview = async (req, res) => {
         const createdTime = String(new Date());//임시, 원래는 프론트에서 넘겨주어야 함
         // console.log(createdTime)
 
-        await Review.create({
+        const list = await Review.create({
             productId,
             title,
             content,
@@ -21,7 +21,9 @@ const createReview = async (req, res) => {
             userId,
             userName
         });
-        res.send({ msg: "댓글이 작성되었습니다" });
+        console.log(list)
+
+        res.json({ msg: "댓글이 작성되었습니다", list });
 
     }
     catch (error) {
@@ -41,20 +43,16 @@ const createReview = async (req, res) => {
 //   })
 
 const removeReview = async (req, res) => {
-    const { productId } = req.params;
+    // const { reviewsid } = req.params;
     const { reviewsid } = req.body;
-    const { userId } = res.locals;
-    const thisReview = await Review.findByPk(reviewsid);  //findByPk 절대안됨 왜안되는지도 모름 개억울함 , fingOne 이것도 안됨 ㅡㅡ  
-    console.log(req.params);
-    console.log(req.body);
-    console.log(res.locals);
-    console.log(thisReview);
+    // const reviewid = 1
+    const { user } = res.locals;
+    console.log(req.params, user, reviewsid);
+    // const deleteReview = await Review.findOne({
+    //     where:{ }
+    // });
 
-    //(저 진짜 리뷰작성코드 오류잡는데 새벽 날렸습니다.. 혼이 담긴 코드에요) //증인:윤하님,석일님,영수님 
-    //(윤하님이 계속 방해했는데 열심히 코드 만들었습니다)
-    //(경은님과 진우님한테 뒤를 맡기겠습니다.. 전 안되나봐요 밑에가 sql로 리뷰삭제하는 코드고 위에가 몽고로 댓글 삭제했던 코드입니다)
-    //(내일 오전에 없으면 죽은줄아세요)
-
+    // console.log(thisReview);
 
     // await thisReview.destroy();
 
@@ -62,29 +60,26 @@ const removeReview = async (req, res) => {
 
 }
 
-// const removeReview = async (req, res) => {
+// async function httpDeleteComment(req, res) {
+//     const { accomoId, commentId } = req.params;
+//     const { userId } = res.locals.user;
+
 //     try {
-//         const { productId } = req.params
-//         const { reviewid } = req.body;
-//         const { userId } = res.locals;
-//         console.log(req.params);
-//         console.log(req.body);
-//         console.log(res.locals);
+//       const existingComment = await Comment.findOne({
+//         where: { commentId: commentId, accomoId: accomoId, userId: userId },
+//       });
 
-//         const thisReview = await Review.findByPk(reviewid);
+//       if (!existingComment) return res.status(400).send();
 
-//         if (thisReview.productId !== Number(productId) || thisReview.user_id !== Number(user_id)) {// 이것도 넘겨줄때 integer로 넘겨주거나 number처리 안하면 오류남
-//             throw Error("서버 검증 오류");
-//         }
-//         await thisReview.destroy();
+//       await Comment.destroy({
+//         where: { commentId: commentId, accomoId: accomoId, userId: userId },
+//       });
 
-//         res.send({ msg: "댓글이 삭제되었습니다" });
+//       res.status(204).send();
+//     } catch (err) {
+//       console.log(err);
 //     }
-//     catch (error) {
-//         console.log(error);
-//         res.status(400).send({ msg: error.message });
-//     }
-// };
+//   }
 
 
 //댓글 삭제
