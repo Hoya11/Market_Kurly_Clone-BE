@@ -4,10 +4,10 @@ const port = 3001;     //3001번 포트로 열어 로컬환경에서 서버를 �
 const userRouter = require("./routes/user")//router폴더 안에 있는 기능을 서버로 가져와서 postRouter변수에 넣어
 const productRouter = require("./routes/product")//router폴더 안에 있는 기능을 서버로 가져와서 postRouter변수에 넣어
 const reviewRouter = require("./routes/review")
-
+const cartRouter = require("./routes/cart")
 
 const requestMiddleware = (req, res, next) => {
-    console.log("request Url : ", req.originalUrl, "-", new Date());
+    // console.log("request Url : ", req.originalUrl, "-", new Date());
     next();
 };
 
@@ -17,7 +17,7 @@ const requestMiddleware = (req, res, next) => {
 app.use(express.static("static"));
 app.use(requestMiddleware);
 app.use(express.json());
-app.use("/api", [userRouter, productRouter, reviewRouter]);
+app.use("/api", [userRouter, productRouter, reviewRouter, cartRouter]);
 
 
 app.get("/", (req, res) => {
