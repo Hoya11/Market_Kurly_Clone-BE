@@ -16,9 +16,12 @@ const addCart = async (req, res) => {
     const { productId } = req.params;
     const thePost = await productDetail.findOne({ productId });
     const exitCart = await Cart.findOne({ userId, productId });
+    const abcd = Number(exitCart.amount) + Number(amount) 
     console.log(userId, amount, productId)
     if (exitCart) {
-        await Cart.update({ userId, productId }, { where: { amount: +amount } })
+        await Cart.update({ amount: abcd }, { where: { userId, productId } })
+        await exitCart.save()
+        console.log(abcd);
         return res.status(200).json({ ok: "기존에 있는거여서 추가 했슴당" });
     }
 
@@ -48,7 +51,8 @@ const addCart = async (req, res) => {
 const getCart = async (req, res) => {
     const userId = res.locals.user.userId;
     try {
-        const getCarts = await Cart.find({ userId });
+        const getCarts = await Cart.findAll({ userId });
+        console.log(getCarts)
         return res.status(200).json({
             ok: "true",
             carts: getCarts,
