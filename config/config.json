@@ -3,21 +3,21 @@
     "username": "ohjinwootest",
     "password": "Otest1238",
     "database": "market_kurly",
-    "host": "54.180.137.91",
+    "host": "admin.cpi6zwtg2yzi.ap-northeast-2.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
+    "username": "ohjinwootest",
     "password": null,
     "database": "database_test",
-    "host": "127.0.0.1",
+    "host": "admin.cpi6zwtg2yzi.ap-northeast-2.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
+    "username": "ohjinwootest",
     "password": null,
     "database": "database_production",
-    "host": "127.0.0.1",
+    "host": "admin.cpi6zwtg2yzi.ap-northeast-2.rds.amazonaws.com",
     "dialect": "mysql"
   }
 }
