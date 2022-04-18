@@ -23,7 +23,7 @@ const createReview = async (req, res) => {
         });
         console.log(list)
 
-        res.json({ msg: "댓글이 작성되었습니다", list });
+        res.send({ msg: "댓글이 작성되었습니다", list });
 
     }
     catch (error) {
