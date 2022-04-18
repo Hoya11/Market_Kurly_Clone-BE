@@ -1,11 +1,12 @@
 {
   "development": {
-    "username": "root",
-    "password": "1234qwer",
-    "database": "market_kurly",
-    "host": "127.0.0.1",
+    "username": "market22",
+    "password": "1234qqww",
+    "database": "market11",
+    "host": "market11.cm1ddkms2wsw.ap-northeast-2.rds.amazonaws.com",
     "dialect": "mysql"
   },
+  
   "test": {
     "username": "root",
     "password": null,
