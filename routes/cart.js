@@ -14,7 +14,7 @@ router.post("/cart/:productId", middleswares, addCart);
 router.get("/cart/:productId", middleswares, getCart);
 
 // 장바구니 삭제
-router.delete("/cart", middleswares, deleteCart);
+router.delete("/cart/:productId", middleswares, deleteCart);
 
 
 
