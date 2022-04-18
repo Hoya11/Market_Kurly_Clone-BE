@@ -4,8 +4,7 @@
   "description": "항해99 클론코딩 프로젝트 / Market Kurly",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",

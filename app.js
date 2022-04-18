@@ -15,7 +15,6 @@ const requestMiddleware = (req, res, next) => {
 };
 
 //app.use : 미들웨어를 사용할 때 쓰는 코드
-app.use(express.static("static"));
 app.use(requestMiddleware);
 app.use(express.json());
 app.use("/api", [userRouter, productRouter, reviewRouter, cartRouter]);
