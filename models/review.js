@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Review.init({
-    reviewid: {
+    reviewId: {
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
