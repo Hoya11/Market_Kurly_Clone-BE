@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "root",
+    "username": "ohjinwootest",
     "password": "Otest1238",
     "database": "market_kurly",
-    "host": "127.0.0.1",
+    "host": "54.180.137.91",
     "dialect": "mysql"
   },
   "test": {
