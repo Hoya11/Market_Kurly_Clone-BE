@@ -3,7 +3,7 @@
     "username": "ohjinwootest",
     "password": "Otest1238",
     "database": "market_kurly",
-    "host": "54.180.137.91",
+    "host": "admin.cpi6zwtg2yzi.ap-northeast-2.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "test": {
