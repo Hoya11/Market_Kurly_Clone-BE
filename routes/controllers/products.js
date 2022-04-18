@@ -8,6 +8,7 @@ const newProduct = async (req, res) => {
     res.json({ newList })
 }
 
+
 const bestProduct = async (req, res) => {
     const bestList = await productBest.findAll({ where: {} })
     console.log(bestList);

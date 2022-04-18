@@ -49,6 +49,7 @@ const removeReview = async (req, res) => {
     res.send({ msg: "댓글이 삭제되었습니다" });
 }
 
+
 // async function httpDeleteComment(req, res) {
 //     const { accomoId, commentId } = req.params;
 //     const { userId } = res.locals.user;

@@ -10,6 +10,7 @@ const { Cart, productDetail } = require('../../models');
 //     const cart = await Cart.findAll({ where: { userId } })
 // }
 
+
 const addCart = async (req, res) => {
     const userId = res.locals.user.userId;
     const { amount } = req.body;
