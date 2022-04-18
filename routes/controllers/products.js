@@ -17,6 +17,7 @@ const saleProduct = async (req, res) => {
     const saleList = await productSale.findAll({ where: {} })
     console.log(saleList);
     res.json({ saleList })
+    
 }
 
 const getDetail = async (req, res) => {
