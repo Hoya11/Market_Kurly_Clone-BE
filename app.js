@@ -5,7 +5,7 @@ const userRouter = require("./routes/user")//router폴더 안에 있는 기능�
 const productRouter = require("./routes/product")//router폴더 안에 있는 기능을 서버로 가져와서 postRouter변수에 넣어
 const reviewRouter = require("./routes/review")
 const cartRouter = require("./routes/cart")
-const cors = requrie('cors')
+const cors = require('cors')
 //테스트
 
 
