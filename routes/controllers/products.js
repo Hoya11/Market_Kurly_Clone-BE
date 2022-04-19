@@ -25,8 +25,8 @@ const getDetail = async (req, res) => {
     const { productId } = req.params;
     const Detailpage = await productDetail.findAll({where: {productId}})
     console.log(Detailpage);
-    // const reviewList = await Review.findAll({ where: { productId } })
-    res.json({ Detailpage })
+    const reviewList = await Review.findAll({ where: { productId } })
+    res.json({ Detailpage, reviewList })
 }
 
 
