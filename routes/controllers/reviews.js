@@ -9,9 +9,7 @@ const createReview = async (req, res) => {
         const { user } = res.locals;
         const userId = user.userId
         const userName = user.userName
-        // console.log(userId, userName)
-        const createdTime = moment().format("YYYY-MM-DD HH:mm:ss");//임시, 원래는 프론트에서 넘겨주어야 함
-        // console.log(createdTime)
+        const createdTime = moment().format("YYYY-MM-DD HH:mm:ss")
 
         const list = await Review.create({
             productId,
