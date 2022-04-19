@@ -31,11 +31,11 @@ const signUp = async (req, res) => {
 
 //로그인
 const login = async (req, res) => {
-    const { userId, password } = req.body; 
-    console.log(userId,password)
-    const user = await User.findOne({ where: { userId, password }});
+    const { userId, password } = req.body;
+    console.log(userId, password)
+    const user = await User.findOne({ where: { userId, password } });
 
-    if(!user) {
+    if (!user) {
         res.status(400).send({
             errorMessage: '닉네임 또는 패스워드를 확인해주세요.'
         })
@@ -53,9 +53,9 @@ const user = async (req, res) => {
     const { user } = res.locals;//변수user에 res.locals를 할당해준다
     // console.log(locals)
     res.send({//응답값 user
-      user,
+        user,
     });
-  }
+}
 
 
 
