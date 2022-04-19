@@ -1,4 +1,4 @@
-const { productNew, productBest, productSale, productDetail, reviews } = require("../../models");
+const { productNew, productBest, productSale, productDetail, Review } = require("../../models");
 
 // const authMiddleware = require("../middleswares/auth-middleware")
 
@@ -22,10 +22,11 @@ const saleProduct = async (req, res) => {
 }
 
 const getDetail = async (req, res) => {
-    // const { productId } = req.params;
-    const Detailpage = await productDetail.findAll({})
-    const reviewList = await Review.findAll({ where: { productId } })
-    res.json({ Detailpage, reviewList })
+    const { productId } = req.params;
+    const Detailpage = await productDetail.findAll({where: {productId}})
+    console.log(Detailpage);
+    // const reviewList = await Review.findAll({ where: { productId } })
+    res.json({ Detailpage })
 }
 
 
