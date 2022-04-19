@@ -57,7 +57,12 @@ const getCart = async (req, res) => {
 const deleteCart = async (req, res) => {
     const userId = res.locals.user.userId;
     const { cartId } = req.body;
-    await Cart.destroy({ where: {cartId, userId}})
+    try{
+        await Cart.destroy({ where: {cartId, userId}})
+        return res.status(200).send({ msg: '삭제가 완료되었습니다.'})
+    } catch (error){
+        res.status(400).send({msg: '오류'})
+    }
 
     res.send({ msg: "윤하짱짱" });
 }
