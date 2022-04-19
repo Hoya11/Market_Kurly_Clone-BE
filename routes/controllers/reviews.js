@@ -1,6 +1,6 @@
 const res = require('express/lib/response');
 const { Review } = require("../../models");
-
+const moment = require("moment");
 
 const createReview = async (req, res) => {
     try {
@@ -10,7 +10,7 @@ const createReview = async (req, res) => {
         const userId = user.userId
         const userName = user.userName
         // console.log(userId, userName)
-        const createdTime = String(new Date());//임시, 원래는 프론트에서 넘겨주어야 함
+        const createdTime = moment().format("YYYY-MM-DD HH:mm:ss");//임시, 원래는 프론트에서 넘겨주어야 함
         // console.log(createdTime)
 
         const list = await Review.create({

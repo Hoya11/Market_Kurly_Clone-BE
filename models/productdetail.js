@@ -13,19 +13,20 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-
   productDetail.init({
     productId: {
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
+    productnewId: DataTypes.INTEGER,
+    productbestId: DataTypes.INTEGER,
+    productsaleId: DataTypes.INTEGER,
     title: DataTypes.STRING,
     subtitle: DataTypes.STRING,
     price: DataTypes.INTEGER,
     discount: DataTypes.INTEGER,
     kulyOnly: DataTypes.BOOLEAN,
     imgurl: DataTypes.STRING,
-    like: DataTypes.INTEGER,
     salesUnit: DataTypes.STRING,
     weigtVolume: DataTypes.STRING,
     shippingType: DataTypes.STRING,
@@ -39,5 +40,3 @@ module.exports = (sequelize, DataTypes) => {
   });
   return productDetail;
 };
-
-

@@ -22,9 +22,10 @@ const saleProduct = async (req, res) => {
 }
 
 const getDetail = async (req, res) => {
-    // const { productId } = req.params;
-    const Detailpage = await productDetail.findAll({})
-    const reviewList = await Review.findAll({ where: { productId } })
+    const { productId } = req.params;
+    const Detailpage = await productDetail.findAll({ where: { productId } })
+    const reviewList = await Review.findAll({ where: { productId } }).sort({ createdTime: -1 });
+    console.log(reviewList);
     res.json({ Detailpage, reviewList })
 }
 
