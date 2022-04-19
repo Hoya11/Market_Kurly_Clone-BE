@@ -14,7 +14,7 @@ router.post("/cart/:productId", middleswares, addCart);
 // router.post("/modal/cart/:productId",middleswares , modalCart)
 
 // 장바구니 조회
-router.get("/cart/:productId", middleswares, getCart);
+router.get("/cart", middleswares, getCart);
 
 // 장바구니 삭제
 router.delete("/cart/:productId", middleswares, deleteCart);
