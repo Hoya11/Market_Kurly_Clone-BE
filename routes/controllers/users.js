@@ -14,6 +14,7 @@ const signUp = async (req, res) => {
         return; //값이 같다면 리턴
     }
 
+
     const existUsers = await User.findAll({
         where: { userId }
     });

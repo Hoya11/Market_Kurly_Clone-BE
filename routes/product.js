@@ -17,7 +17,7 @@ router.get("/product/detail/:productId", getDetail);
 
 
 
-module.exports = router;
 
+module.exports = router;
 
 

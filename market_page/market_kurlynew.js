@@ -67,6 +67,7 @@ const { productNew } = require('../models');
   browser.close();
 })();
 
+
 // kurlyNew()
 // #goodsList > div.list_goods > div > ul > li:nth-child(3) > div > div > a > img
 // #goodsList > div.list_goods > div > ul > li:nth-child(2) > div > a > span.name

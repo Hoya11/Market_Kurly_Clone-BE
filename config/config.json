@@ -1,11 +1,14 @@
 {
   "development": {
-    "username": "root",
+
+    "username": "ohjinwootest",
     "password": "Otest1238",
-    "database": "market_kurly",
-    "host": "127.0.0.1",
+    "database": "database-1",
+    "host": "database-1.cpi6zwtg2yzi.ap-northeast-2.rds.amazonaws.com",
+
     "dialect": "mysql"
   },
+   
   "test": {
     "username": "root",
     "password": null,
@@ -21,3 +24,4 @@
     "dialect": "mysql"
   }
 }
+

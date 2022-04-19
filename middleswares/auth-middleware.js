@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
         });
         return;
     }
-    
+
     try {
         const { userId } = jwt.verify(tokenValue, "m-s-k-j-w");
 
@@ -21,7 +21,7 @@ module.exports = (req, res, next) => {
             res.locals.user = user;
             next();
         });
-        
+
     } catch (error) {
         res.status(401).send({
             errorMessage: '로그인 후 사용하세요.'

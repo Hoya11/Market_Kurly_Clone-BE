@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER,
     },
-    productbestId: DataTypes.INTEGER,
+    productId: DataTypes.INTEGER,
     userId: DataTypes.STRING,
     title: DataTypes.STRING,
     price: DataTypes.INTEGER,
@@ -30,4 +30,3 @@ module.exports = (sequelize, DataTypes) => {
   });
   return Cart;
 };
-
