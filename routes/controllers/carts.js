@@ -5,8 +5,8 @@ const addCart = async (req, res) => {
     const userId = res.locals.user.userId;
     const { amount } = req.body;
     const { productId } = req.params;
-    const thePost = await productDetail.findOne({ productId });
-    const exitCart = await Cart.findOne({ userId, productId });
+    const thePost = await productDetail.findOne( {where: { productId }});
+    const exitCart = await Cart.findOne({where: { userId, productId }});
     // console.log(userId, amount, productId, exitCart)
     // console.log(exitCart.amount)
     // console.log(cartAmount)
