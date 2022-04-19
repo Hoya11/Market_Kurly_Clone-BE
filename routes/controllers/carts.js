@@ -66,8 +66,6 @@ const deleteCart = async (req, res) => {
     } catch (error){
         res.status(400).send({result: 'false', msg:"삭제완료"})
     }
-
-    res.send({ msg: "윤하짱짱" });
 }
 
 
