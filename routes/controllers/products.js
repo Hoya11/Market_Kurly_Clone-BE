@@ -1,4 +1,4 @@
-const { productNew, productBest, productSale, productDetail, reviews } = require("../../models");
+const { productNew, productBest, productSale, productDetail, Review } = require("../../models");
 
 // const authMiddleware = require("../middleswares/auth-middleware")
 
