@@ -68,7 +68,7 @@ const deleteCart = async (req, res) => {
     const { cartId } = req.body;
     await Cart.destroy({ where: {cartId}})
 
-    res.send({ msg: "댓글이 삭제되었습니다" });
+    res.send({ msg: "윤하짱짱" });
 }
 
 module.exports = {

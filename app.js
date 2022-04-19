@@ -5,7 +5,7 @@ const userRouter = require("./routes/user")//router폴더 안에 있는 기능�
 const productRouter = require("./routes/product")//router폴더 안에 있는 기능을 서버로 가져와서 postRouter변수에 넣어
 const reviewRouter = require("./routes/review")
 const cartRouter = require("./routes/cart")
-
+const cors = requrie('cors')
 //테스트
 
 
@@ -15,6 +15,7 @@ const requestMiddleware = (req, res, next) => {
 };
 
 //app.use : 미들웨어를 사용할 때 쓰는 코드
+app.use(cors())
 app.use(requestMiddleware);
 app.use(express.json());
 app.use("/api", [userRouter, productRouter, reviewRouter, cartRouter]);
