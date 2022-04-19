@@ -56,12 +56,15 @@ const getCart = async (req, res) => {
 //장바구니 삭제
 const deleteCart = async (req, res) => {
     const userId = res.locals.user.userId;
+    const cartUser = await Cart.findAll({where: { userId }})
     const { cartId } = req.body;
     try{
+        if(userId === cartUser.userId){
         await Cart.destroy({ where: {cartId, userId}})
-        return res.status(200).send({ msg: '삭제가 완료되었습니다.'})
+        return res.status(200).send({ result: 'success', msg:"삭제완료"})
+        }
     } catch (error){
-        res.status(400).send({msg: '오류'})
+        res.status(400).send({result: 'false', msg:"삭제완료"})
     }
 
     res.send({ msg: "윤하짱짱" });
