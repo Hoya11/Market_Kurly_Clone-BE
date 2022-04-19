@@ -84,7 +84,7 @@ const addCart = async (req, res) => {
 const getCart = async (req, res) => {
     const userId = res.locals.user.userId;
     try {
-        const getCarts = await Cart.findAll({ userId });
+        const getCarts = await Cart.findAll({where:{ userId }});
         console.log(getCarts)
         return res.status(200).json({
             ok: "true",
