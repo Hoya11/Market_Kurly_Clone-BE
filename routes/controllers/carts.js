@@ -55,36 +55,36 @@ const getCart = async (req, res) => {
 
 //장바구니 삭제
 
-const deleteCart = async (req, res) => {
-    const { cartId } = req.body;
-    const userId = res.locals.user.userId;
-    const cartUser = await Cart.findAll({where: { userId }})
-    console.log(1, cartUser);
-    console.log(2, cartUser.userId);
+// const deleteCart = async (req, res) => {
+//     const { cartId } = req.body;
+//     const userId = res.locals.user.userId;
+//     const cartUser = await Cart.findAll({where: { userId }})
+//     console.log(1, cartUser);
+//     console.log(2, cartUser.userId);
     
 
-    if(cartUser.userId){
-        await Cart.destroy({ where: {cartId, userId}})
-        return res.status(200).send({ result: 'success', msg:"삭제완료"})
-    }else {
-        return res.status(400).send({ msg: "윤하짱짱" });
-    }
-}
-
-// const deleteCart = async (req, res) => {
-//     const userId = res.locals.user.userId;
-//     const { cartId } = req.body;
-//     try {
-//         await Cart.destroy({ where: { userId, cartId } })
-//         return res.status(200).send({
-//             result: 'success',
-//             msg: '장바구니에서 삭제',
-//         });
-
-//     } catch (err) {
-//         console.log(err)
+//     if(userId){
+//         await Cart.destroy({ where: {cartId, userId}})
+//         return res.status(200).send({ result: 'success', msg:"삭제완료"})
+//     }else {
+//         return res.status(400).send({ msg: "윤하짱짱" });
 //     }
 // }
+
+const deleteCart = async (req, res) => {
+    const userId = res.locals.user.userId;
+    const { cartId } = req.body;
+    try {
+        await Cart.destroy({ where: { userId, cartId } })
+        return res.status(200).send({
+            result: 'success',
+            msg: '장바구니에서 삭제',
+        });
+
+    } catch (err) {
+        console.log(err)
+    }
+}
 
 
 module.exports = {
