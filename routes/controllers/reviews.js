@@ -42,7 +42,8 @@ const createReview = async (req, res) => {
 
 const removeReview = async (req, res) => {
     const { reviewId } = req.body;
-    await Review.destroy({ where: { reviewId } })
+    const userId = res.locals.user.userId;
+    await Review.destroy({ where: { reviewId, userId } })
 
     res.send({ msg: "댓글이 삭제되었습니다" });
 }
