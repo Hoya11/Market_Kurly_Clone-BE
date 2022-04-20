@@ -1,4 +1,4 @@
-const { Cart, productDetail } = require('../../models');
+const { Cart, productDetail, productNew, productBest, productSale } = require('../../models');
 
 
 //상세 페이지에서 장바구니 담기
@@ -42,7 +42,7 @@ const newCart = async (req, res) => {
     const userId = res.locals.user.userId;
     const { amount } = req.body;
     const { productnewId } = req.params;
-    const thePost = await productDetail.findOne({where: { productnewId }});
+    const thePost = await productNew.findOne({where: { productnewId }});
     const exitCart = await Cart.findOne({where: { userId, productnewId }});
     
     if (exitCart) {
@@ -78,7 +78,7 @@ const bestCart = async (req, res) => {
     const userId = res.locals.user.userId;
     const { amount } = req.body;
     const { productbestId } = req.params;
-    const thePost = await productDetail.findOne({where: { productbestId }});
+    const thePost = await productBest.findOne({where: { productbestId }});
     const exitCart = await Cart.findOne({where: { userId, productbestId }});
     
     if (exitCart) {
@@ -114,7 +114,7 @@ const saleCart = async (req, res) => {
     const userId = res.locals.user.userId;
     const { amount } = req.body;
     const { productsaleId } = req.params;
-    const thePost = await productDetail.findOne({where: { productsaleId }});
+    const thePost = await productSale.findOne({where: { productsaleId }});
     const exitCart = await Cart.findOne({where: { userId, productsaleId }});
     
     if (exitCart) {
