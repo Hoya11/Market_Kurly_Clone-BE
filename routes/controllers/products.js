@@ -20,7 +20,8 @@ const saleProduct = async (req, res) => {
 const getDetail = async (req, res) => {
     const { productId } = req.params;
     const Detailpage = await productDetail.findAll({where: {productId}})
-    const reviewList = await Review.findAll({ where: { productId } }).sort({createdTime: -1});
+    const reviewList = await Review.findAll({ where: { productId } })
+    //.sort({createdTime: -1});
     res.json({ Detailpage, reviewList })
 }
 
