@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "ohjinwootest",
-    "password": "Otest1238",
-    "database": "database-1",
-    "host": "database-1.cpi6zwtg2yzi.ap-northeast-2.rds.amazonaws.com",
+    "username": "root",
+    "password": "1234qwer",
+    "database": "my-server",
+    "host": "127.0.0.1",
     "dialect": "mysql"
   },
    

@@ -40,45 +40,50 @@ const addCart = async (req, res) => {
     }
 };
 
-//모달창에서 장바구니 담기
-// const modalCart = async (req, res) => {
-//     const userId = res.locals.user.userId;
-//     const { amount } = req.body;
-//     const { productId } = req.params;
-//     const thePost = await productDetail.findOne({ productId });
-//     const exitCart = await Cart.findOne({ userId, productId });
-//     // console.log(userId, amount, productId, exitCart)
-//     // console.log(exitCart.amount)
-//     // console.log(cartAmount)
-//     if (exitCart) {
-//         const cartAmount = Number(amount) + Number(exitCart.amount)
-//         await Cart.update({ amount: +cartAmount }, { where: { userId, productId } })
-//         return res.status(200).json({ ok: "기존에 있는거여서 추가 했슴당" });
-//     }
+// 모달창에서 장바구니 담기
+const modalCart = async (req, res) => {
+    const userId = res.locals.user.userId;
+    const { amount } = req.body;
+    const { productId, productbsetId, productnewId, productsaleId } = req.params;
+    const thePost = await productDetail.findOne({ productId, productbsetId, productnewId, productsaleId });
+    const exitCart = await Cart.findOne({ userId, productId, productbsetId, productnewId, productsaleId });
+    // console.log(userId, amount, thePost, exitCart)
+    // console.log(exitCart.amount)
+    // console.log(cartAmount)
+    if (exitCart) {
+        const cartAmount = Number(amount) + Number(exitCart.amount)
+        await Cart.update({ amount: +cartAmount }, { where: { userId, productId, productbsetId, productnewId, productsaleId } })
+        return res.status(200).json({ ok: "기존에 있는거여서 추가 했슴당" });
+    }
 
-//     try {
-//         await Cart.create({
-
-//             userId,
-//             productId,
-//             title: thePost.title,
-//             price: thePost.price,
-//             imgurl: thePost.imgurl,
-//             amount,
-//         });
-//         const data = {
-//             userId,
-//             productId,
-//             title: thePost.title,
-//             price: thePost.price,
-//             imgurl: thePost.imgurl,
-//             amount,
-//         };
-//         res.status(200).json({ ok: "true", data });
-//     } catch (error) {
-//         res.status(400).json({ ok: "false" });
-//     }
-// }
+    try {
+        await Cart.create({
+            userId,
+            productId,
+            productbsetId,
+            productnewId,
+            productsaleId,
+            title: thePost.title,
+            price: thePost.price,
+            imgurl: thePost.imgurl,
+            amount,
+        });
+        const data = {
+            userId,
+            productId,
+            productbsetId,
+            productnewId,
+            productsaleId,
+            title: thePost.title,
+            price: thePost.price,
+            imgurl: thePost.imgurl,
+            amount,
+        };
+        res.status(200).json({ ok: "true", data });
+    } catch (error) {
+        res.status(400).json({ ok: "false" });
+    }
+}
 
 // 장바구니 조회
 const getCart = async (req, res) => {
@@ -97,10 +102,18 @@ const getCart = async (req, res) => {
 
 //장바구니 삭제
 const deleteCart = async (req, res) => {
+    const userId = res.locals.user.userId;
     const { cartId } = req.body;
-    await Cart.destroy({ where: {cartId}})
+    try {
+        await Cart.destroy({ where: { userId, cartId } })
+        return res.status(200).send({
+            result: 'success',
+            msg: '장바구니에서 삭제',
+        });
 
-    res.send({ msg: "윤하짱짱" });
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 
@@ -109,7 +122,7 @@ module.exports = {
     addCart,
     getCart,
     deleteCart,
-    // modalCart
+    modalCart
 };
 
 
