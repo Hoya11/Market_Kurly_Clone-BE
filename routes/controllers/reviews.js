@@ -2,6 +2,7 @@ const res = require('express/lib/response');
 const { Review } = require("../../models");
 const moment = require("moment");
 
+//리뷰 저장
 const createReview = async (req, res) => {
     try {
         const { productId } = req.params;
@@ -30,16 +31,7 @@ const createReview = async (req, res) => {
     }
 };
 
-
-
-
-// router.delete("/comments/delete/:commentId", authMiddleware, async (req, res) => {
-//     const { commentId } = req.params;
-//     await Comment.deleteOne({ _id: commentId });
-//     console.log(commentId)
-//     res.send({ result: '삭제완료' });
-//   })
-
+// 리뷰 삭제
 const removeReview = async (req, res) => {
     const { reviewId } = req.body;
     const userId = res.locals.user.userId;
@@ -49,29 +41,6 @@ const removeReview = async (req, res) => {
 }
 
 
-// async function httpDeleteComment(req, res) {
-//     const { accomoId, commentId } = req.params;
-//     const { userId } = res.locals.user;
-
-//     try {
-//       const existingComment = await Comment.findOne({
-//         where: { commentId: commentId, accomoId: accomoId, userId: userId },
-//       });
-
-//       if (!existingComment) return res.status(400).send();
-
-//       await Comment.destroy({
-//         where: { commentId: commentId, accomoId: accomoId, userId: userId },
-//       });
-
-//       res.status(204).send();
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   }
-
-
-//댓글 삭제
 
 module.exports = { createReview, removeReview }
 
