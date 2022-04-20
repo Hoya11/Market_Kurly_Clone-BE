@@ -38,6 +38,7 @@ const addCart = async (req, res) => {
     }
 };
 
+// 신상품 모달창에서 장바구니 담기
 const newCart = async (req, res) => {
     const userId = res.locals.user.userId;
     const { amount } = req.body;
@@ -74,6 +75,7 @@ const newCart = async (req, res) => {
     }
 };
 
+// 베스트 모달창에서 장바구니 담기
 const bestCart = async (req, res) => {
     const userId = res.locals.user.userId;
     const { amount } = req.body;
@@ -110,6 +112,7 @@ const bestCart = async (req, res) => {
     }
 };
 
+// 알뜰쇼핑 모달창에서 장바구니 담기
 const saleCart = async (req, res) => {
     const userId = res.locals.user.userId;
     const { amount } = req.body;
@@ -161,7 +164,7 @@ const getCart = async (req, res) => {
     }
 };
 
-
+// 장바구니 삭제
 const deleteCart = async (req, res) => {
     const userId = res.locals.user.userId;
     const { cartId } = req.body;

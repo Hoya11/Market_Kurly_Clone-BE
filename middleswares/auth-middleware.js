@@ -5,7 +5,7 @@ const { User } = require("../models");
 module.exports = (req, res, next) => {
     console.log('지나감')
     const { authorization } = req.headers;
-    const [tokenType, tokenValue] = authorization.split(' ')//Bearer를 제거하고 뒤에있는 토근값만 받기위해 스플릿으로 나누어줬다.
+    const [tokenType, tokenValue] = authorization.split(' ')
     console.log(tokenType)
     if (tokenType !== 'Bearer') {
         res.status(401).send({
@@ -29,8 +29,3 @@ module.exports = (req, res, next) => {
         return;
     }
 };
-
-// module.exports.logout_get = (req, res) => {
-//     res.cookie('jwt', '', { maxAge: 1});
-//     res.redirect('/');
-// }

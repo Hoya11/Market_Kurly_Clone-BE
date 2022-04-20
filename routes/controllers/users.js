@@ -46,7 +46,7 @@ const login = async (req, res) => {
     })
 };
 
-
+//사용자 인증
 const user = async (req, res) => {
     const { user } = res.locals;
     res.send({

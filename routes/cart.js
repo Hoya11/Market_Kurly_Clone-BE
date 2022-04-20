@@ -5,7 +5,6 @@ const middleswares = require("../middleswares/auth-middleware");
 const { addCart, getCart, deleteCart, newCart, bestCart, saleCart, } = require("./controllers/carts");
 
 
-// modalCart,
 
 // 장바구니 추가
 router.post("/cart/:productId", middleswares, addCart);
