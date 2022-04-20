@@ -38,6 +38,114 @@ const addCart = async (req, res) => {
     }
 };
 
+const newCart = async (req, res) => {
+    const userId = res.locals.user.userId;
+    const { amount } = req.body;
+    const { productnewId } = req.params;
+    const thePost = await productDetail.findOne({where: { productnewId }});
+    const exitCart = await Cart.findOne({where: { userId, productnewId }});
+    
+    if (exitCart) {
+        const cartAmount = Number(amount) + Number(exitCart.amount)
+        await Cart.update({ amount: +cartAmount }, { where: { userId, productnewId } })
+        return res.status(200).json({ ok: "기존에 있는거여서 추가 했슴당" });
+    }
+    
+    try {
+        await Cart.create({
+            userId,
+            productnewId,
+            title: thePost.title,
+            price: thePost.price,
+            imgurl: thePost.imgurl,
+            amount,
+        });
+        const data = {
+            userId,
+            productnewId,
+            title: thePost.title,
+            price: thePost.price,
+            imgurl: thePost.imgurl,
+            amount,
+        };
+        res.status(200).json({ ok: "true", data });
+    } catch (error) {
+        res.status(400).json({ ok: "false" });
+    }
+};
+
+const bestCart = async (req, res) => {
+    const userId = res.locals.user.userId;
+    const { amount } = req.body;
+    const { productbestId } = req.params;
+    const thePost = await productDetail.findOne({where: { productbestId }});
+    const exitCart = await Cart.findOne({where: { userId, productbestId }});
+    
+    if (exitCart) {
+        const cartAmount = Number(amount) + Number(exitCart.amount)
+        await Cart.update({ amount: +cartAmount }, { where: { userId, productbestId } })
+        return res.status(200).json({ ok: "기존에 있는거여서 추가 했슴당" });
+    }
+    
+    try {
+        await Cart.create({
+            userId,
+            productbestId,
+            title: thePost.title,
+            price: thePost.price,
+            imgurl: thePost.imgurl,
+            amount,
+        });
+        const data = {
+            userId,
+            productbestId,
+            title: thePost.title,
+            price: thePost.price,
+            imgurl: thePost.imgurl,
+            amount,
+        };
+        res.status(200).json({ ok: "true", data });
+    } catch (error) {
+        res.status(400).json({ ok: "false" });
+    }
+};
+
+const saleCart = async (req, res) => {
+    const userId = res.locals.user.userId;
+    const { amount } = req.body;
+    const { productsaleId } = req.params;
+    const thePost = await productDetail.findOne({where: { productsaleId }});
+    const exitCart = await Cart.findOne({where: { userId, productsaleId }});
+    
+    if (exitCart) {
+        const cartAmount = Number(amount) + Number(exitCart.amount)
+        await Cart.update({ amount: +cartAmount }, { where: { userId, productsaleId } })
+        return res.status(200).json({ ok: "기존에 있는거여서 추가 했슴당" });
+    }
+    
+    try {
+        await Cart.create({
+            userId,
+            productsaleId,
+            title: thePost.title,
+            price: thePost.price,
+            imgurl: thePost.imgurl,
+            amount,
+        });
+        const data = {
+            userId,
+            productsaleId,
+            title: thePost.title,
+            price: thePost.price,
+            imgurl: thePost.imgurl,
+            amount,
+        };
+        res.status(200).json({ ok: "true", data });
+    } catch (error) {
+        res.status(400).json({ ok: "false" });
+    }
+};
+
 // 장바구니 조회
 const getCart = async (req, res) => {
     const userId = res.locals.user.userId;
@@ -72,6 +180,9 @@ const deleteCart = async (req, res) => {
 
 module.exports = {
     addCart,
+    newCart,
+    bestCart,
+    saleCart,
     getCart,
     deleteCart,
 };
