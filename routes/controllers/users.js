@@ -48,10 +48,8 @@ const login = async (req, res) => {
 
 
 const user = async (req, res) => {
-    // console.log(res.locals)
-    const { user } = res.locals;//변수user에 res.locals를 할당해준다
-    // console.log(locals)
-    res.send({//응답값 user
+    const { user } = res.locals;
+    res.send({
         user,
     });
 }
