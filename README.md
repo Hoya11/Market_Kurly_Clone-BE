@@ -1,20 +1,17 @@
 # Market_Kurly_Clone-BE
 항해99 클론코딩 프로젝트 / Market Kurly
 
-백엔드: 오진우,성영호, 오경은
+##👋👨🏻‍🤝‍👨🏻 백엔드: 오진우,성영호, 오경은
 
-#구현 기능: 회원가입,로그인/ 메인페이지,상세페이지 / 리뷰 / 장바구니
+# 구현 기능: 회원가입,로그인/ 메인페이지,상세페이지 / 리뷰 / 장바구니
 
-#제작기간 : 2022-04-15~ 2022-04-21
+# 제작기간 : 2022-04-15~ 2022-04-21
 
-#시연영상
-
-#API
-
-![image](https://user-images.githubusercontent.com/101075355/164399993-7588d66c-356f-4357-a91a-0f2945f5cac7.png)
+# 🎬시연영상
 
 
-#기술스택
+
+## 🔨기술스택
 <div align=center>
 
 <p align="center">
@@ -31,12 +28,17 @@
   <br>
 </div>
 
-#개발툴
+##  🛠개발툴
 
 -   Server: AWS EC2 (Ubuntu 18.04 LTS)
 -   Framework: Express 
--   Database: MongoDB
+-   Database: MYSQL
 -   Language: Javascript
 -   Tool : Git, Notion
 -   Platform : Node.js
+-   Library : Sequelize, MYSQL, Puppeteer
 
+
+# 👨‍💻 API
+
+![image](https://user-images.githubusercontent.com/101075355/164399993-7588d66c-356f-4357-a91a-0f2945f5cac7.png)
