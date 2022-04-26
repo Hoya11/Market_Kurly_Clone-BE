@@ -13,7 +13,8 @@ router.post("/login", login);
 router.get("/users/me", user);
 
 
-// User.associate = function (models) {
+// User.
+// associate = function (models) {
 //     models.User.hasMany(models.productDetail, {
 //       foreignKey: 'userId',
 //       sourceKey: 'userId'
